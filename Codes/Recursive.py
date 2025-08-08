@@ -1,6 +1,7 @@
 import time
 from functools import lru_cache
 from typing import List
+from pprint import pprint
 
 # f(n) = f(n - 1) + f(n - 2)
 # f(1) = 1
@@ -70,6 +71,45 @@ def print_string(string: str, reverse: bool = False):
         if len(string) != 1: print_string(string[1:])
         print(string[0].upper())
 
+
+    """
+    a   => a
+    hi  => hi, ih
+    ali => ali, ail, lia, lai, ila, ial
+    [r, e, z, a] => [reza, reaz, rzea, rzae, raze, raez,
+            zera, zear, zrea, zrae, zare, zaer,
+            ezra, ezar, erza, eraz, earz, eazr,
+            aerz, aezr, arez, arze, azre, azer]
+    """
+def permutation(chars: List[str], level=0, debug=False) -> List[str]:
+    if debug:
+        print("\t" * level, chars)
+    if len(chars) == 1: return chars
+    selected_char = chars[0]
+    rest = chars[1:]
+    rest_permutation = permutation(rest, level + 1)
+    result = []
+    for sub_permutation in rest_permutation:
+        for index in range(len(sub_permutation) + 1):
+            new_permutation = (
+                sub_permutation[:index]
+                + selected_char
+                + sub_permutation[index:]
+            )
+            if debug:
+                print("\t" * level,
+                      f"'{sub_permutation[:index]}'",
+                      f"'{selected_char}'",
+                      f"'{sub_permutation[index:]}'",
+                      "=>", new_permutation)
+            result.append(new_permutation)
+    if debug:
+        print("\t" * level, "=>", result)
+    return result
+
+
 if __name__ == "__main__":
     # check_fibonacci()
-    print_string("python")
+    # print_string("python")
+    pprint(permutation(["R", "E", "Z", "A"], debug=False))
+    pprint(len(permutation(["R", "E", "Z", "A"])))
