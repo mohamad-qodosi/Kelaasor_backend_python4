@@ -1,5 +1,6 @@
 import time
 from functools import lru_cache
+from typing import List
 
 # f(n) = f(n - 1) + f(n - 2)
 # f(1) = 1
@@ -35,3 +36,24 @@ def factorial(n):
     if n == 1:
         return 1
     return n * factorial(n - 1)
+
+def sum_of_numbers(numbers_list: List[int]) -> int:
+    """
+    Practice problem 1:
+        Write a function that takes a list of
+        numbers as input and returns the sum
+        of the numbers inside the list recursively.
+        [5, 3, 7, 9, 2, 7] => ((((([] + 5) + 3) + 7) + 9) + 2) + 7
+    """
+    return (
+            sum_of_numbers(numbers_list[:-1])
+            + numbers_list[-1]
+    ) if numbers_list else 0
+
+
+"""
+
+"""
+
+if __name__ == "__main__":
+    check_fibonacci()
