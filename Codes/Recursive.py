@@ -50,10 +50,26 @@ def sum_of_numbers(numbers_list: List[int]) -> int:
             + numbers_list[-1]
     ) if numbers_list else 0
 
-
-"""
-
-"""
+def print_string(string: str, reverse: bool = False):
+    """
+    Practice problem 2:
+    # input:
+        python
+    # output:
+        P
+        Y
+        T
+        H
+        O
+        N
+    """
+    if not reverse:
+        print(string[0].upper())
+        if len(string) != 1: print_string(string[1:])
+    else:
+        if len(string) != 1: print_string(string[1:])
+        print(string[0].upper())
 
 if __name__ == "__main__":
-    check_fibonacci()
+    # check_fibonacci()
+    print_string("python")
