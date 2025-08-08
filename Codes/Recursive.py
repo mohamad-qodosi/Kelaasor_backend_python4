@@ -30,3 +30,8 @@ def check_fibonacci():
     t3 = time.time()
     print(t2 - t1)
     print(t3 - t2)
+
+def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n - 1)
