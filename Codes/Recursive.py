@@ -1,7 +1,8 @@
 import time
 from functools import lru_cache
-from typing import List
 from pprint import pprint
+from typing import List
+
 
 # f(n) = f(n - 1) + f(n - 2)
 # f(1) = 1
@@ -11,6 +12,7 @@ def fibonacci_linear(n):
     for i in range(2, n):
         fib.append(fib[-1] + fib[-2])
     return fib[n - 1]
+
 
 @lru_cache
 def fibonacci_recursive(n):
@@ -23,6 +25,7 @@ def fibonacci_recursive(n):
             + fibonacci_recursive(n - 2)
     )
 
+
 def check_fibonacci():
     n = int(input())
     t1 = time.time()
@@ -33,10 +36,12 @@ def check_fibonacci():
     print(t2 - t1)
     print(t3 - t2)
 
+
 def factorial(n):
     if n == 1:
         return 1
     return n * factorial(n - 1)
+
 
 def sum_of_numbers(numbers_list: List[int]) -> int:
     """
@@ -50,6 +55,7 @@ def sum_of_numbers(numbers_list: List[int]) -> int:
             sum_of_numbers(numbers_list[:-1])
             + numbers_list[-1]
     ) if numbers_list else 0
+
 
 def print_string(string: str, reverse: bool = False):
     """
@@ -72,6 +78,7 @@ def print_string(string: str, reverse: bool = False):
         print(string[0].upper())
 
 
+def permutation(chars: List[str], level=0, debug=False) -> List[str]:
     """
     a   => a
     hi  => hi, ih
@@ -81,7 +88,6 @@ def print_string(string: str, reverse: bool = False):
             ezra, ezar, erza, eraz, earz, eazr,
             aerz, aezr, arez, arze, azre, azer]
     """
-def permutation(chars: List[str], level=0, debug=False) -> List[str]:
     if debug:
         print("\t" * level, chars)
     if len(chars) == 1: return chars
@@ -91,16 +97,11 @@ def permutation(chars: List[str], level=0, debug=False) -> List[str]:
     result = []
     for sub_permutation in rest_permutation:
         for index in range(len(sub_permutation) + 1):
-            new_permutation = (
-                sub_permutation[:index]
-                + selected_char
-                + sub_permutation[index:]
-            )
+            new_permutation = (sub_permutation[:index] + selected_char + sub_permutation[index:]
+                               )
             if debug:
                 print("\t" * level,
-                      f"'{sub_permutation[:index]}'",
-                      f"'{selected_char}'",
-                      f"'{sub_permutation[index:]}'",
+                      f"'{sub_permutation[:index]}' + '{selected_char}' + '{sub_permutation[index:]}'",
                       "=>", new_permutation)
             result.append(new_permutation)
     if debug:
