@@ -34,3 +34,20 @@ class Node:
     def set_left_child(self, new_left_child: Node) -> None:
         assert isinstance(new_left_child, Node)
         self.__left_child = new_left_child
+
+    def add_child(self, value):
+        if value < self.__value:
+            if self.__left_child is None:
+                self.__left_child = Node(value=value, parent=self)
+            self.__left_child.add_child(value)
+        else:
+            if self.__right_child is None:
+                self.__right_child = Node(value, self)
+            self.__right_child.add_child(value)
+
+    def in_order_traversal(self, level=0):
+        if self.__left_child:
+            self.__left_child.in_order_traversal(level + 1)
+        print('----' * level, self.__value)
+        if self.__right_child:
+            self.__right_child.in_order_traversal(level + 1)
